@@ -1,0 +1,12 @@
+services:
+  mysql:
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=1qaz@WSX
+    volumes:
+      - ./mysql/conf:/etc/mysql/conf.d
+      - ./mysql/scripts:/docker-entrypoint-initdb.d
+networks:
+  mytest-network:

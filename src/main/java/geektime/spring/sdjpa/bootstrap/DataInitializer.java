@@ -16,6 +16,7 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        bookRepository.deleteAll();
         Book book1 = Book.builder()
                 .title("Domain Driven Design")
                 .isbn("123")
