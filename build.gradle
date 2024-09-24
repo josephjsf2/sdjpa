@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.4'
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'org.liquibase.gradle' version '2.2.0'
+
 }
 
 group = 'geektime.spring'
@@ -23,9 +25,22 @@ repositories {
     mavenCentral()
 }
 
+liquibase {
+    activities {
+        main {
+            changelogFile "changelog.mysql.sql"
+            url "jdbc:mysql://127.0.0.1:3306/booksdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
+            username "bookadmin"
+            password "password"
+        }
+    }
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.liquibase:liquibase-core'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
@@ -34,6 +49,11 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     annotationProcessor 'org.projectlombok:lombok'
+
+    liquibaseRuntime 'org.liquibase:liquibase-core:4.27.0'
+    liquibaseRuntime 'info.picocli:picocli:4.7.5'
+    liquibaseRuntime 'org.yaml:snakeyaml:2.0'
+    liquibaseRuntime 'com.mysql:mysql-connector-j:8.3.0'
 }
 
 tasks.named('test') {

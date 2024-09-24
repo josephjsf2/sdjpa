@@ -1,0 +1,5 @@
+-- liquibase formatted sql
+
+-- changeset m00a4041:1727169852503-1
+CREATE TABLE book (id VARCHAR(255) NOT NULL, isbn VARCHAR(255) NULL, publisher VARCHAR(255) NULL, title VARCHAR(255) NULL, CONSTRAINT PK_BOOK PRIMARY KEY (id));
+
